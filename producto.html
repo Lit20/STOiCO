@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto - Stoico</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">STOiCO</div>
+        <ul class="navbar-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="coleccion.html"><i class="fas fa-th-large"></i> Colección</a></li>
+            <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
+            <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+        </ul>
+    </nav>
+    <div class="product-container">
+        <div class="product-gallery">
+            <img class="main-image" src="https://via.placeholder.com/400" alt="Producto Principal">
+            <div class="thumbnail-images">
+                <img src="https://via.placeholder.com/100" alt="Miniatura 1">
+                <img src="https://via.placeholder.com/100" alt="Miniatura 2">
+                <img src="https://via.placeholder.com/100" alt="Miniatura 3">
+                <img src="https://via.placeholder.com/100" alt="Miniatura 4">
+            </div>
+        </div>
+        <div class="product-details">
+            <h1>Nombre del Producto</h1>
+            <p class="product-price">MXN 239.00 <span class="old-price">MXN 399.00</span></p>
+            <p>Modelo: 185 cm de altura y talla 40</p>
+            <label for="size">Talla:</label>
+            <select id="size">
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+            </select>
+            <button class="add-to-cart">Añadir a mi cesta</button>
+            <div class="additional-info">
+                <h2>Completa tu look</h2>
+                <div class="related-products">
+                    <div class="related-product-item">
+                        <img src="https://via.placeholder.com/100" alt="Producto Relacionado 1">
+                        <p>Producto Relacionado 1</p>
+                    </div>
+                    <div class="related-product-item">
+                        <img src="https://via.placeholder.com/100" alt="Producto Relacionado 2">
+                        <p>Producto Relacionado 2</p>
+                    </div>
+                    <!-- Añade más productos relacionados según sea necesario -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

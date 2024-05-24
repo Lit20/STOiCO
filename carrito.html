@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Stoico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">STOiCO</div>
+        <ul class="navbar-menu">
+            <li><a href="index.html"><i class="fa fa-home"></i>Inicio</a></li>
+            <li><a href="coleccion.html"><i class="fa fa-th-large"></i>Colección</a></li>
+            <li><a href="carrito.html"><i class="fa fa-shopping-cart"></i>Carrito</a></li>
+            <li><a href="perfil.html"><i class="fa fa-user"></i>Cuenta</a></li>
+        </ul>
+    </nav>
+
+    <div class="carrito-container">
+        <h2 class="carrito-title">Carrito de Compras</h2>
+        <div class="carrito-items" id="carrito-items"></div>
+        <div class="carrito-total">
+            <h3>Total: $<span id="total-price">0</span></h3>
+            <button class="checkout-btn">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const carritoItemsContainer = document.getElementById('carrito-items');
+            carritoItemsContainer.innerHTML = '';
+
+            let totalPrice = 0;
+
+            cart.forEach(product => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'carrito-item';
+                itemElement.innerHTML = `
+                    <img src="path_to_image${product.id}.jpg" alt="${product.name}">
+                    <div class="item-details">
+                        <h3>${product.name}</h3>
+                        <p>$${product.price} x ${product.quantity}</p>
+                        <input type="number" value="${product.quantity}" min="1" onchange="updateQuantity(${product.id}, this.value)">
+                        <button class="remove-item" onclick="removeFromCart(${product.id})">Eliminar</button>
+                    </div>
+                `;
+                carritoItemsContainer.appendChild(itemElement);
+
+                totalPrice += product.price * product.quantity;
+            });
+
+            document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+        }
+
+        function updateQuantity(productId, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const productIndex = cart.findIndex(item => item.id == productId);
+
+            if (productIndex >= 0) {
+                cart[productIndex].quantity = parseInt(quantity);
+                if (cart[productIndex].quantity <= 0) {
+                    cart.splice(productIndex, 1);
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCart();
+            }
+        }
+
+        function removeFromCart(productId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.id != productId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>

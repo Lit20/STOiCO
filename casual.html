@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casual - Stoico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">STOiCO</div>
+        <ul class="navbar-menu">
+            <li><a href="index.html"><i class="fa fa-home"></i>Inicio</a></li>
+            <li><a href="coleccion.html"><i class="fa fa-th-large"></i>Colección</a></li>
+            <li><a href="carrito.html"><i class="fa fa-shopping-cart"></i>Carrito</a></li>
+            <li><a href="perfil.html"><i class="fa fa-user"></i>Cuenta</a></li>
+        </ul>
+    </nav>
+
+    <div class="catalogo-container">
+        <!-- Example of a product item -->
+        <div class="catalogo-item" data-id="1" data-name="Camiseta Deportiva" data-price="20">
+            <img src="path_to_image1.jpg" alt="Camiseta Deportiva">
+            <h3>Camiseta Casual</h3>
+            <p>$20</p>
+            <button onclick="addToCart(1)">Añadir a Cesta</button>
+        </div>
+        <div class="catalogo-item" data-id="2" data-name="Pantalón Deportivo" data-price="25">
+            <img src="path_to_image2.jpg" alt="Pantalón Deportivo">
+            <h3>Pantalón Casual</h3>
+            <p>$25</p>
+            <button onclick="addToCart(2)">Añadir a Cesta</button>
+        </div>
+        <!-- Add more product items as needed -->
+    </div>
+
+    <script>
+        function addToCart(productId) {
+            const productElement = document.querySelector(`.catalogo-item[data-id='${productId}']`);
+            const productName = productElement.getAttribute('data-name');
+            const productPrice = productElement.getAttribute('data-price');
+            
+            const product = {
+                id: productId,
+                name: productName,
+                price: productPrice,
+                quantity: 1
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProductIndex = cart.findIndex(item => item.id == product.id);
+
+            if (existingProductIndex >= 0) {
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                cart.push(product);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${productName} ha sido añadido a la cesta.`);
+            window.location.href = "carrito.html";
+        }
+    </script>
+</body>
+</html>
